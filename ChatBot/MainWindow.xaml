@@ -10,12 +10,44 @@
         Width="400"
         MinHeight="300"
         MinWidth="200">
+    <Window.Resources>
+        <Style TargetType="Image"
+               x:Key="iconosBarraHerramientas">
+            <Setter Property="Width"
+                    Value="25" />
+            <Setter Property="Margin"
+                    Value="2" />
+        </Style>
+    </Window.Resources>
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            
+            <MenuItem Header="Archivo">
+                <MenuItem Header="Nueva conversación"></MenuItem>
+                <MenuItem Header="Guardar conversación"></MenuItem>
+                <Separator />
+                <MenuItem Header="Salir"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Herramientas">
+                <MenuItem Header="Configuración"></MenuItem>
+                <MenuItem Header="Comprobar conexión"></MenuItem>
+            </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
-            
+            <ToolBar>
+                <Image Source="./recursos/new.png"
+                       Style="{StaticResource iconosBarraHerramientas}" />
+                <Image Source="./recursos/save.png"
+                       Style="{StaticResource iconosBarraHerramientas}"  />
+                <Separator />
+                <Image Source="./recursos/config.ico"
+                       Style="{StaticResource iconosBarraHerramientas}"  />
+                <Image Source="./recursos/check.png"
+                       Style="{StaticResource iconosBarraHerramientas}"  />
+                <Separator />
+                <Image Source="./recursos/exit.ico"
+                       Style="{StaticResource iconosBarraHerramientas}"  />
+            </ToolBar>
         </ToolBarTray>
         <DockPanel DockPanel.Dock="Bottom">
             <Image DockPanel.Dock="Right" />
