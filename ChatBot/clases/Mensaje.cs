@@ -36,9 +36,9 @@ namespace ChatBot.clases
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Mensaje(string emisor, string texto)
+        public Mensaje(Emisor remitente, string texto)
         {
-            Emisor = emisor;
+            Remitente = remitente;
             Texto = texto;
         }
 

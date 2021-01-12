@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:clases="clr-namespace:ChatBot.clases"
+        xmlns:emisor="clr-namespace:ChatBot.clases;assembly=ChatBot"
         mc:Ignorable="d"
         Title="ChatBot"
         Icon="./recursos/robot.ico"
@@ -14,23 +16,101 @@
         <Style TargetType="Image"
                x:Key="iconosBarraHerramientas">
             <Setter Property="Width"
-                    Value="25" />
+                    Value="30" />
             <Setter Property="Margin"
                     Value="2" />
         </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush"
+                    Value="Black" />
+            <Setter Property="BorderThickness"
+                    Value="2" />
+        </Style>
+
+        <Style x:Key="imagenMensaje"
+               TargetType="{x:Type Image}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Remitente}"
+                             Value="{x:Static emisor:Mensaje+Emisor.Usuario}">
+                    <Setter Property="Source"
+                            Value="./recursos/hombre.png" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Remitente}"
+                             Value="{x:Static emisor:Mensaje+Emisor.Robot}">
+                    <Setter Property="Source"
+                            Value="./recursos/robot.png" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="textoMensaje"
+               TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Remitente}"
+                             Value="{x:Static emisor:Mensaje+Emisor.Usuario}">
+                    <Setter Property="Text"
+                            Value="Usuario" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Remitente}"
+                             Value="{x:Static emisor:Mensaje+Emisor.Robot}">
+                    <Setter Property="Text"
+                            Value="Robot" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate DataType="{x:Type clases:Mensaje}">
+            <Border CornerRadius="5">
+                <StackPanel>
+                    <DockPanel>
+                        <Image Style="{StaticResource imagenMensaje}" />
+                        <TextBlock Text="{Binding Path=Remitente}" />
+                    </DockPanel>
+                    <TextBlock TextWrapping="Wrap"
+                               Text="{Binding Path=Texto}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
     </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="clases:ComandosChatBot.Enviar"
+                        Executed="Enviar_Executed"
+                        CanExecute="Enviar_CanExecute" />
+    </Window.CommandBindings>
     
-    <DockPanel>
+    <DockPanel Background="LightYellow">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Archivo">
-                <MenuItem Header="Nueva conversación"></MenuItem>
-                <MenuItem Header="Guardar conversación"></MenuItem>
+            <MenuItem Header="_Archivo">
+                <MenuItem Header="_Nueva conversación">
+                    <MenuItem.Icon>
+                        <Image Source="./recursos/new.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Guardar conversación">
+                    <MenuItem.Icon>
+                        <Image Source="./recursos/save.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Salir"></MenuItem>
+                <MenuItem Header="_Salir">
+                    <MenuItem.Icon>
+                        <Image Source="./recursos/exit.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
-            <MenuItem Header="Herramientas">
-                <MenuItem Header="Configuración"></MenuItem>
-                <MenuItem Header="Comprobar conexión"></MenuItem>
+            <MenuItem Header="_Herramientas">
+                <MenuItem Header="Con_figuración">
+                    <MenuItem.Icon>
+                        <Image Source="./recursos/config.ico" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Comprobar conexión">
+                    <MenuItem.Icon>
+                        <Image Source="./recursos/check.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
@@ -49,12 +129,25 @@
                        Style="{StaticResource iconosBarraHerramientas}"  />
             </ToolBar>
         </ToolBarTray>
-        <DockPanel DockPanel.Dock="Bottom">
-            <Image DockPanel.Dock="Right" />
-            <TextBox />
+        <DockPanel DockPanel.Dock="Bottom"
+                   Height="33">
+            <Button DockPanel.Dock="Right"
+                    Command="clases:ComandosChatBot.Enviar">
+                <Image Source="./recursos/send.png" />
+            </Button>
+            <TextBox x:Name="textoEscrito"
+                     FontSize="15"
+                     VerticalContentAlignment="Center"
+                     BorderBrush="Black"
+                     BorderThickness="2" />
         </DockPanel>
-        <ItemsControl>
-            
+        <ItemsControl x:Name="listaMensajes"
+                      ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel></StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
         </ItemsControl>
     </DockPanel>
 </Window>
