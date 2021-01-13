@@ -16,20 +16,22 @@
         <Style TargetType="Image"
                x:Key="iconosBarraHerramientas">
             <Setter Property="Width"
-                    Value="30" />
+                    Value="27" />
             <Setter Property="Margin"
                     Value="2" />
         </Style>
 
-        <Style TargetType="Border">
-            <Setter Property="BorderBrush"
-                    Value="Black" />
-            <Setter Property="BorderThickness"
-                    Value="2" />
+        <Style x:Key="textoMensaje"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize"
+                    Value="15" />
         </Style>
 
         <Style x:Key="imagenMensaje"
                TargetType="{x:Type Image}">
+            <Setter Property="Width"
+                    Value="25" />
+
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Remitente}"
                              Value="{x:Static emisor:Mensaje+Emisor.Usuario}">
@@ -44,33 +46,56 @@
             </Style.Triggers>
         </Style>
 
-        <Style x:Key="textoMensaje"
-               TargetType="{x:Type TextBlock}">
+        <Style x:Key="caracteristicasMensaje"
+               TargetType="{x:Type Border}">
+            <Setter Property="Margin"
+                    Value="10" />
+            <Setter Property="Padding"
+                    Value="5" />
+            <Setter Property="CornerRadius"
+                    Value="5" />
+            <Setter Property="BorderBrush"
+                    Value="Black" />
+            <Setter Property="BorderThickness"
+                    Value="2" />
+            
+            <Setter Property="DockPanel.Dock"
+                    Value="Left" />
+            <Setter Property="Background"
+                    Value="LightGreen" />
+
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Remitente}"
-                             Value="{x:Static emisor:Mensaje+Emisor.Usuario}">
-                    <Setter Property="Text"
-                            Value="Usuario" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Remitente}"
                              Value="{x:Static emisor:Mensaje+Emisor.Robot}">
-                    <Setter Property="Text"
-                            Value="Robot" />
+                    <Setter Property="DockPanel.Dock"
+                            Value="Right" />
+                    <Setter Property="Background"
+                            Value="Cyan" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
         <DataTemplate DataType="{x:Type clases:Mensaje}">
-            <Border CornerRadius="5">
-                <StackPanel>
-                    <DockPanel>
-                        <Image Style="{StaticResource imagenMensaje}" />
-                        <TextBlock Text="{Binding Path=Remitente}" />
-                    </DockPanel>
-                    <TextBlock TextWrapping="Wrap"
-                               Text="{Binding Path=Texto}" />
-                </StackPanel>
-            </Border>
+            <DockPanel LastChildFill="False">
+                <Border CornerRadius="5"
+                        Style="{StaticResource caracteristicasMensaje}"
+                        MinHeight="50"
+                        MinWidth="100">
+                    <StackPanel>
+                        <DockPanel>
+                            <Image Style="{StaticResource imagenMensaje}" />
+                            <TextBlock Text="{Binding Path=Remitente}"
+                                       FontWeight="Bold"
+                                       Style="{StaticResource textoMensaje}"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0,0,0"/>
+                        </DockPanel>
+                        <TextBlock TextWrapping="Wrap"
+                                   Style="{StaticResource textoMensaje}"
+                                   Text="{Binding Path=Texto}" />
+                    </StackPanel>
+                </Border>
+            </DockPanel>
         </DataTemplate>
     </Window.Resources>
 
@@ -78,35 +103,50 @@
         <CommandBinding Command="clases:ComandosChatBot.Enviar"
                         Executed="Enviar_Executed"
                         CanExecute="Enviar_CanExecute" />
+        <CommandBinding Command="clases:ComandosChatBot.Limpiar"
+                        Executed="Limpiar_Executed"
+                        CanExecute="GestionarConversacion_CanExecute" />
+        <CommandBinding Command="clases:ComandosChatBot.Guardar"
+                        Executed="Guardar_Executed"
+                        CanExecute="GestionarConversacion_CanExecute" />
+        <CommandBinding Command="clases:ComandosChatBot.Salir"
+                        Executed="Salir_Executed" />
+        <CommandBinding Command="clases:ComandosChatBot.Comprobar"
+                        Executed="Comprobar_Executed" />        
     </Window.CommandBindings>
     
     <DockPanel Background="LightYellow">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Archivo">
-                <MenuItem Header="_Nueva conversación">
+                <MenuItem Header="_Nueva conversación"
+                          Command="clases:ComandosChatBot.Limpiar">
                     <MenuItem.Icon>
                         <Image Source="./recursos/new.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Guardar conversación">
+                <MenuItem Header="_Guardar conversación"
+                          Command="clases:ComandosChatBot.Guardar">
                     <MenuItem.Icon>
                         <Image Source="./recursos/save.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="_Salir">
+                <MenuItem Header="_Salir"
+                          Command="clases:ComandosChatBot.Salir">
                     <MenuItem.Icon>
                         <Image Source="./recursos/exit.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Herramientas">
-                <MenuItem Header="Con_figuración">
+                <MenuItem Header="Con_figuración"
+                          Command="clases:ComandosChatBot.Configurar">
                     <MenuItem.Icon>
                         <Image Source="./recursos/config.ico" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Comprobar conexión">
+                <MenuItem Header="_Comprobar conexión"
+                          Command="clases:ComandosChatBot.Comprobar">
                     <MenuItem.Icon>
                         <Image Source="./recursos/check.png" />
                     </MenuItem.Icon>
@@ -115,18 +155,28 @@
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
-                <Image Source="./recursos/new.png"
-                       Style="{StaticResource iconosBarraHerramientas}" />
-                <Image Source="./recursos/save.png"
-                       Style="{StaticResource iconosBarraHerramientas}"  />
+                <Button Command="clases:ComandosChatBot.Limpiar">
+                    <Image Source="./recursos/new.png"
+                           Style="{StaticResource iconosBarraHerramientas}" />
+                </Button>
+                <Button Command="clases:ComandosChatBot.Guardar">
+                    <Image Source="./recursos/save.png"
+                           Style="{StaticResource iconosBarraHerramientas}" />
+                </Button>
                 <Separator />
-                <Image Source="./recursos/config.ico"
-                       Style="{StaticResource iconosBarraHerramientas}"  />
-                <Image Source="./recursos/check.png"
-                       Style="{StaticResource iconosBarraHerramientas}"  />
+                <Button Command="clases:ComandosChatBot.Configurar">
+                    <Image Source="./recursos/config.ico"
+                           Style="{StaticResource iconosBarraHerramientas}" />
+                </Button>
+                <Button Command="clases:ComandosChatBot.Comprobar">
+                    <Image Source="./recursos/check.png"
+                           Style="{StaticResource iconosBarraHerramientas}" />
+                </Button>
                 <Separator />
-                <Image Source="./recursos/exit.ico"
-                       Style="{StaticResource iconosBarraHerramientas}"  />
+                <Button Command="clases:ComandosChatBot.Salir">
+                    <Image Source="./recursos/exit.ico"
+                           Style="{StaticResource iconosBarraHerramientas}" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
         <DockPanel DockPanel.Dock="Bottom"
@@ -142,7 +192,9 @@
                      BorderThickness="2" />
         </DockPanel>
         <ItemsControl x:Name="listaMensajes"
-                      ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}">
+                      ItemsSource="{Binding}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel></StackPanel>

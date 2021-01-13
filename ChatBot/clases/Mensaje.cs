@@ -46,5 +46,11 @@ namespace ChatBot.clases
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public override string ToString()
+        {
+            return $"{Remitente}\n" +
+                   $"{Texto}";
+        }
     }
 }
