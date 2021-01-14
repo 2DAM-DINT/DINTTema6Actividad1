@@ -124,7 +124,7 @@
                         <Image Source="./recursos/new.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Guardar conversación"
+                <MenuItem Header="_Guardar conversación..."
                           Command="clases:ComandosChatBot.Guardar">
                     <MenuItem.Icon>
                         <Image Source="./recursos/save.png" />
@@ -195,11 +195,6 @@
                       ItemsSource="{Binding}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel></StackPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
         </ItemsControl>
     </DockPanel>
 </Window>

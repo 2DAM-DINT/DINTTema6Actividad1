@@ -2,7 +2,7 @@
 
 namespace ChatBot.clases
 {
-    public class ComandosChatBot
+    public static class ComandosChatBot
     {
         public static readonly RoutedUICommand Enviar = new RoutedUICommand
         (
