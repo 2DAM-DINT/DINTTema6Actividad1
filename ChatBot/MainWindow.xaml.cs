@@ -1,4 +1,5 @@
 ﻿using ChatBot.clases;
+using ChatBot.ventanas;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
@@ -22,7 +23,11 @@ namespace ChatBot
 
         private void Enviar_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Mensajes.Add(new Mensaje(Mensaje.Emisor.Usuario, textoEscrito.Text));
+            Mensajes.Add(
+                new Mensaje(
+                    (Mensaje.Emisor) Enum.Parse(
+                        typeof(Mensaje.Emisor), 
+                        Properties.Settings.Default.generoUsuario), textoEscrito.Text));
             Mensajes.Add(new Mensaje(Mensaje.Emisor.Robot, "Lo siento, estoy un poco cansado para hablar."));
             textoEscrito.Text = "";
         }
@@ -59,12 +64,22 @@ namespace ChatBot
 
         private void Configurar_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Opción no implementada aún.");
-        }
+            DialogoConfiguracion configuracion = new DialogoConfiguracion();
+            configuracion.Owner = this;
+            configuracion.ColorFondoChat = Properties.Settings.Default.colorFondo;
+            configuracion.ColorMensajesUsuario = Properties.Settings.Default.colorUsuario;
+            configuracion.ColorMensajesBot = Properties.Settings.Default.colorBot;
+            configuracion.GeneroEmisor = (Mensaje.Emisor) Enum.Parse(
+                typeof(Mensaje.Emisor), Properties.Settings.Default.generoUsuario);
 
-        private void Configurar_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = false;
+            if (configuracion.ShowDialog() == true)
+            {
+                Properties.Settings.Default.colorFondo = configuracion.ColorFondoChat;
+                Properties.Settings.Default.colorUsuario = configuracion.ColorMensajesUsuario;
+                Properties.Settings.Default.colorBot = configuracion.ColorMensajesBot;
+                Properties.Settings.Default.generoUsuario = configuracion.GeneroEmisor.ToString();
+            }
+
         }
 
         private void Comprobar_Executed(object sender, ExecutedRoutedEventArgs e)

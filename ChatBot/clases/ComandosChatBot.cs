@@ -69,5 +69,16 @@ namespace ChatBot.clases
                 new KeyGesture(Key.O, ModifierKeys.Control)
             }
         );
+
+        public static readonly RoutedUICommand Cancelar = new RoutedUICommand
+        (
+            "Cancelar",
+            "Cancelar",
+            typeof(ComandosChatBot),
+            new InputGestureCollection
+            {
+                new KeyGesture(Key.Escape)
+            }
+        );
     }
 }

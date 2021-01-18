@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ventanas\DialogoConfiguracion.xaml.cs">
+      <DependentUpon>DialogoConfiguracion.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,6 +75,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ventanas\DialogoConfiguracion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -99,7 +106,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="recursos\mujer.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="recursos\check.png" />
     <Resource Include="recursos\config.ico" />
@@ -110,6 +119,9 @@
     <Resource Include="recursos\robot.png" />
     <Resource Include="recursos\save.png" />
     <Resource Include="recursos\send.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\otro.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

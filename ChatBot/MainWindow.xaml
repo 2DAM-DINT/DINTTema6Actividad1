@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:clases="clr-namespace:ChatBot.clases"
         xmlns:emisor="clr-namespace:ChatBot.clases;assembly=ChatBot"
+        xmlns:properties="clr-namespace:ChatBot.Properties"
         mc:Ignorable="d"
         Title="ChatBot"
         Icon="./recursos/robot.ico"
@@ -33,10 +34,20 @@
                     Value="25" />
 
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Remitente}"
-                             Value="{x:Static emisor:Mensaje+Emisor.Usuario}">
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=generoUsuario}"
+                             Value="Hombre">
                     <Setter Property="Source"
                             Value="./recursos/hombre.png" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=generoUsuario}"
+                             Value="Mujer">
+                    <Setter Property="Source"
+                            Value="./recursos/mujer.png" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=generoUsuario}"
+                             Value="Otro">
+                    <Setter Property="Source"
+                            Value="./recursos/otro.png" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Remitente}"
                              Value="{x:Static emisor:Mensaje+Emisor.Robot}">
@@ -62,7 +73,7 @@
             <Setter Property="DockPanel.Dock"
                     Value="Left" />
             <Setter Property="Background"
-                    Value="LightGreen" />
+                    Value="{Binding Source={x:Static properties:Settings.Default}, Path=colorUsuario}" />
 
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Remitente}"
@@ -70,7 +81,7 @@
                     <Setter Property="DockPanel.Dock"
                             Value="Right" />
                     <Setter Property="Background"
-                            Value="Cyan" />
+                            Value="{Binding Source={x:Static properties:Settings.Default}, Path=colorBot}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -111,11 +122,13 @@
                         CanExecute="GestionarConversacion_CanExecute" />
         <CommandBinding Command="clases:ComandosChatBot.Salir"
                         Executed="Salir_Executed" />
+        <CommandBinding Command="clases:ComandosChatBot.Configurar"
+                        Executed="Configurar_Executed" />
         <CommandBinding Command="clases:ComandosChatBot.Comprobar"
                         Executed="Comprobar_Executed" />        
     </Window.CommandBindings>
     
-    <DockPanel Background="LightYellow">
+    <DockPanel Background="{Binding Source={x:Static properties:Settings.Default}, Path=colorFondo}">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Archivo">
                 <MenuItem Header="_Nueva conversación"

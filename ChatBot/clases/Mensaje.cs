@@ -1,10 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 namespace ChatBot.clases
 {
     public class Mensaje : INotifyPropertyChanged
     {
-        public enum Emisor { Usuario, Robot }
+        public enum Emisor { Hombre, Mujer, Otro, Robot }
 
         private Emisor remitente;
         public Emisor Remitente
@@ -17,6 +20,20 @@ namespace ChatBot.clases
                     this.remitente = value;
                     this.NotifyPropertyChanged("Remitente");
                 }
+            }
+        }
+
+        public static string[] GenerosValidos
+        {
+            get
+            {
+                string[] generosValidos;
+
+                List<string> listaGeneros = Enum.GetNames(typeof(Mensaje.Emisor)).ToList();
+                listaGeneros.Remove(Mensaje.Emisor.Robot.ToString());
+                generosValidos = listaGeneros.ToArray();
+
+                return generosValidos;
             }
         }
 
