@@ -34,17 +34,17 @@
                     Value="25" />
 
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=generoUsuario}"
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=GeneroUsuario}"
                              Value="Hombre">
                     <Setter Property="Source"
                             Value="./recursos/hombre.png" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=generoUsuario}"
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=GeneroUsuario}"
                              Value="Mujer">
                     <Setter Property="Source"
                             Value="./recursos/mujer.png" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=generoUsuario}"
+                <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=GeneroUsuario}"
                              Value="Otro">
                     <Setter Property="Source"
                             Value="./recursos/otro.png" />
@@ -73,7 +73,7 @@
             <Setter Property="DockPanel.Dock"
                     Value="Left" />
             <Setter Property="Background"
-                    Value="{Binding Source={x:Static properties:Settings.Default}, Path=colorUsuario}" />
+                    Value="{Binding Source={x:Static properties:Settings.Default}, Path=ColorUsuario}" />
 
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Remitente}"
@@ -81,7 +81,7 @@
                     <Setter Property="DockPanel.Dock"
                             Value="Right" />
                     <Setter Property="Background"
-                            Value="{Binding Source={x:Static properties:Settings.Default}, Path=colorBot}" />
+                            Value="{Binding Source={x:Static properties:Settings.Default}, Path=ColorBot}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -128,7 +128,7 @@
                         Executed="Comprobar_Executed" />        
     </Window.CommandBindings>
     
-    <DockPanel Background="{Binding Source={x:Static properties:Settings.Default}, Path=colorFondo}">
+    <DockPanel Background="{Binding Source={x:Static properties:Settings.Default}, Path=ColorFondo}">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Archivo">
                 <MenuItem Header="_Nueva conversación"

@@ -25,49 +25,76 @@ namespace ChatBot.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FFFFFFE0")]
-        public global::System.Windows.Media.SolidColorBrush colorFondo {
+        [global::System.Configuration.DefaultSettingValueAttribute("LightYellow")]
+        public string ColorFondo {
             get {
-                return ((global::System.Windows.Media.SolidColorBrush)(this["colorFondo"]));
+                return ((string)(this["ColorFondo"]));
             }
             set {
-                this["colorFondo"] = value;
+                this["ColorFondo"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF90EE90")]
-        public global::System.Windows.Media.SolidColorBrush colorUsuario {
+        [global::System.Configuration.DefaultSettingValueAttribute("LightBlue")]
+        public string ColorUsuario {
             get {
-                return ((global::System.Windows.Media.SolidColorBrush)(this["colorUsuario"]));
+                return ((string)(this["ColorUsuario"]));
             }
             set {
-                this["colorUsuario"] = value;
+                this["ColorUsuario"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FF00FFFF")]
-        public global::System.Windows.Media.SolidColorBrush colorBot {
+        [global::System.Configuration.DefaultSettingValueAttribute("Cyan")]
+        public string ColorBot {
             get {
-                return ((global::System.Windows.Media.SolidColorBrush)(this["colorBot"]));
+                return ((string)(this["ColorBot"]));
             }
             set {
-                this["colorBot"] = value;
+                this["ColorBot"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Hombre")]
-        public string generoUsuario {
+        public string GeneroUsuario {
             get {
-                return ((string)(this["generoUsuario"]));
+                return ((string)(this["GeneroUsuario"]));
             }
             set {
-                this["generoUsuario"] = value;
+                this["GeneroUsuario"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EndPoint {
+            get {
+                return ((string)(this["EndPoint"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EndPointKey {
+            get {
+                return ((string)(this["EndPointKey"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string KnowledgeBaseId {
+            get {
+                return ((string)(this["KnowledgeBaseId"]));
             }
         }
     }

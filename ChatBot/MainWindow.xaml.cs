@@ -27,7 +27,7 @@ namespace ChatBot
                 new Mensaje(
                     (Mensaje.Emisor) Enum.Parse(
                         typeof(Mensaje.Emisor), 
-                        Properties.Settings.Default.generoUsuario), textoEscrito.Text));
+                        Properties.Settings.Default.GeneroUsuario), textoEscrito.Text));
             Mensajes.Add(new Mensaje(Mensaje.Emisor.Robot, "Lo siento, estoy un poco cansado para hablar."));
             textoEscrito.Text = "";
         }
@@ -66,18 +66,17 @@ namespace ChatBot
         {
             DialogoConfiguracion configuracion = new DialogoConfiguracion();
             configuracion.Owner = this;
-            configuracion.ColorFondoChat = Properties.Settings.Default.colorFondo;
-            configuracion.ColorMensajesUsuario = Properties.Settings.Default.colorUsuario;
-            configuracion.ColorMensajesBot = Properties.Settings.Default.colorBot;
-            configuracion.GeneroEmisor = (Mensaje.Emisor) Enum.Parse(
-                typeof(Mensaje.Emisor), Properties.Settings.Default.generoUsuario);
+            configuracion.ColorFondoChat = Properties.Settings.Default.ColorFondo;
+            configuracion.ColorMensajesUsuario = Properties.Settings.Default.ColorUsuario;
+            configuracion.ColorMensajesBot = Properties.Settings.Default.ColorBot;
+            configuracion.GeneroEmisor = Properties.Settings.Default.GeneroUsuario;
 
             if (configuracion.ShowDialog() == true)
             {
-                Properties.Settings.Default.colorFondo = configuracion.ColorFondoChat;
-                Properties.Settings.Default.colorUsuario = configuracion.ColorMensajesUsuario;
-                Properties.Settings.Default.colorBot = configuracion.ColorMensajesBot;
-                Properties.Settings.Default.generoUsuario = configuracion.GeneroEmisor.ToString();
+                Properties.Settings.Default.ColorFondo = configuracion.ColorFondoChat;
+                Properties.Settings.Default.ColorUsuario = configuracion.ColorMensajesUsuario;
+                Properties.Settings.Default.ColorBot = configuracion.ColorMensajesBot;
+                Properties.Settings.Default.GeneroUsuario = configuracion.GeneroEmisor;
             }
 
         }

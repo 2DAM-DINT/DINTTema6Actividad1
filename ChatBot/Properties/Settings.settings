@@ -2,17 +2,26 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ChatBot.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="colorFondo" Type="System.Windows.Media.SolidColorBrush" Scope="User">
-      <Value Profile="(Default)">#FFFFFFE0</Value>
+    <Setting Name="ColorFondo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LightYellow</Value>
     </Setting>
-    <Setting Name="colorUsuario" Type="System.Windows.Media.SolidColorBrush" Scope="User">
-      <Value Profile="(Default)">#FF90EE90</Value>
+    <Setting Name="ColorUsuario" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LightBlue</Value>
     </Setting>
-    <Setting Name="colorBot" Type="System.Windows.Media.SolidColorBrush" Scope="User">
-      <Value Profile="(Default)">#FF00FFFF</Value>
+    <Setting Name="ColorBot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Cyan</Value>
     </Setting>
-    <Setting Name="generoUsuario" Type="System.String" Scope="User">
+    <Setting Name="GeneroUsuario" Type="System.String" Scope="User">
       <Value Profile="(Default)">Hombre</Value>
+    </Setting>
+    <Setting Name="EndPoint" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EndPointKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="KnowledgeBaseId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

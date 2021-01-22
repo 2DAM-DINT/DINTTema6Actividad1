@@ -1,31 +1,19 @@
 ﻿using ChatBot.clases;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ChatBot.ventanas
 {
     public partial class DialogoConfiguracion : Window
     {
-        public SolidColorBrush ColorFondoChat { get; set; }
+        public string ColorFondoChat { get; set; }
 
-        public SolidColorBrush ColorMensajesUsuario { get; set; }
+        public string ColorMensajesUsuario { get; set; }
 
-        public SolidColorBrush ColorMensajesBot { get; set; }
+        public string ColorMensajesBot { get; set; }
 
-        public Mensaje.Emisor GeneroEmisor { get; set; }
+        public string GeneroEmisor { get; set; }
 
 
         public DialogoConfiguracion()
